@@ -119,9 +119,9 @@ Document: [token_1 ... token_512 | token_462 ... token_974 | ...]
                                    ↑ overlap zone ↑
 ```
 
-- ✅ Simple, fast, predictable
-- ✅ Good general-purpose baseline
-- ❌ May cut sentences or ideas mid-thought
+-  Simple, fast, predictable
+-  God general-purpose baseline
+- May cut sentences or ideas mid-thought
 - **Default:** 512 tokens, 10–20% overlap
 
 ---
@@ -134,9 +134,9 @@ Sentence 1. Sentence 2. Sentence 3.  → Chunk 1 (under limit)
 Sentence 4. Sentence 5.              → Chunk 2
 ```
 
-- ✅ Never cuts mid-sentence
-- ✅ More natural reading units
-- ❌ Variable chunk sizes
+- Never cuts mid-sentence
+- More natural reading units
+- Variable chunk sizes
 - **Best for:** Articles, conversational text, documentation
 
 ---
@@ -149,9 +149,9 @@ Try to split on `\n\n` first, then `\n`, then spaces, then characters. Preserves
 separators = ["\n\n", "\n", " ", ""]
 ```
 
-- ✅ Respects paragraph and line structure
-- ✅ LangChain default — widely used
-- ❌ Still character/token-based, not semantic
+- Respects paragraph and line structure
+- LangChain default — widely used
+- Still character/token-based, not semantic
 - **Best for:** General prose with paragraph breaks
 
 ---
@@ -166,9 +166,9 @@ Split on headings (H1 / H2 / H3). Each section becomes its own chunk.
 # Section 2: Sick Leave            → Chunk 4
 ```
 
-- ✅ Sections are naturally coherent units
-- ✅ Headings make great metadata labels
-- ❌ Sections can be very long (needs secondary split) or very short
+- Sections are naturally coherent units
+- Headings make great metadata labels
+- Sections can be very long (needs secondary split) or very short
 - **Best for:** PDFs, wikis, handbooks, structured documentation
 
 ---
@@ -183,10 +183,10 @@ Sentence 3 → embed → sim(S3, S4) = 0.43  → SPLIT HERE  ← topic changed
 Sentence 4 → embed → ...
 ```
 
-- ✅ Chunks align with actual topic shifts
-- ✅ Best quality for dense technical text
-- ❌ Slow — requires embedding every sentence at index time
-- ❌ Expensive
+- Chunks align with actual topic shifts
+- Best quality for dense technical text
+- Slow — requires embedding every sentence at index time
+- Expensive
 - **Best for:** Academic papers, legal documents, research reports
 
 ---
@@ -205,10 +205,10 @@ Output chunks:
 - "Unused vacation days can be carried over, up to a maximum of 5 days."
 ```
 
-- ✅ Maximum retrieval precision
-- ✅ Each chunk answers exactly one question
-- ❌ Very expensive (LLM call per passage)
-- ❌ Slow
+- Maximum retrieval precision
+- Each chunk answers exactly one question
+- Very expensive (LLM call per passage)
+- Slow
 - **Best for:** High-stakes FAQ systems, medical/legal, when precision > cost
 
 ---
@@ -217,7 +217,7 @@ Output chunks:
 
 | Strategy | Speed | Quality | Semantic Awareness | Best Default? |
 |---|---|---|---|---|
-| Fixed-size | ⚡ Fast | Good | None | ✅ Yes |
+| Fixed-size |  Fast | Good | None | Yes |
 | Sentence-aware | Fast | Better | Low | For articles |
 | Recursive | Fast | Good | Low | LangChain default |
 | Document-structure | Fast | Good | Medium | For structured docs |
@@ -363,4 +363,3 @@ results = vector_db.query(
 > *"I use recursive or sentence-aware chunking at 512 tokens with 10–20% overlap. For high-precision systems I use parent-child chunking — small child chunks for retrieval, large parent chunks sent to the LLM. Every chunk carries metadata: source, page, section, timestamp, and access level."*
 
 ---
-*LLM Fundamentals · Module 02b · Ingestion & Chunking*
